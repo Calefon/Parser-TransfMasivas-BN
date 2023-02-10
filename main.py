@@ -13,11 +13,14 @@ def show_exception_and_exit(exc_type, exc_value, tb):
 
 sys.excepthook = show_exception_and_exit
 
+EXCEL = input("Ingrese nombre o ruta del archivo excel:")
+if(".xlsx" not in EXCEL):
+    EXCEL += ".xlsx"
+
 #Constantes
 CBU_ETEC = "0110599520000054713868"
 LARGO_DE_LINEA = 218
 
-EXCEL = input("Ingrese nombre o ruta del archivo (con extension):")
 
 #Carga de archivo excel en Pandas Dataframe
 excelDF = pd.read_excel(EXCEL)
