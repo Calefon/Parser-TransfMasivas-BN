@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 #Parser para la generación de TXT de transferencias masivas Banco Nación
 #Formato de columnas excel de entrada:
-#Nombre/Apellido/CBU/Monto/Concepto(1 celda)/Referencia(1 celda)
+#Nombre/Apellido/CBU/Importe/Concepto(1 celda)/Referencia(1 celda)
 
 #Manejo de excepción para que no se cierre la terminal
 def show_exception_and_exit(exc_type, exc_value, tb):
@@ -95,9 +95,9 @@ with open(conc[:20]+".txt", "wb") as transfTXT:
     for i in excelDF.index:
         camposLinea.getCamposFromRow(excelDF.iloc[[i]])
         lineaTXT = camposLinea.genLine(lastLine=False)
-        print(len(lineaTXT))
+
         if(len(lineaTXT) != LARGO_DE_LINEA ):
-            raise Exception('\n\nError: una linea no tiene el formato correcto (longitud de caracteres distinta de 218)')
+            raise Exception(f'\n\nError en línea {i+1}: la linea no tiene el formato correcto (longitud de caracteres distinta de 218)')
         transfTXT.write(bytes(lineaTXT, "UTF-8"))
 
     lineaTXT = camposLinea.genLine(lastLine=True)
